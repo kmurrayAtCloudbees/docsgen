@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    label: ps-docs-autogen
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    tty: true
+  - name: asciidoctor
+    image: asciidoctor/docker-asciidoctor
+    tty: true
+  - name: pandoc
+    image: pandoc/core
+    tty: true
+  - name: gdocs
+    image: sbatchelder/ps-gdoc-autogen
+    tty: true

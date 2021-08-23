@@ -1,0 +1,21 @@
+
+== Operating System
+
+CloudBees CI Operation Center and Client controllers are available as a standalone multi-platform WAR file or as an installation package for the following operating systems:
+* Linux
+  * Ubuntu
+  * Red Hat
+  * Debian
+  * CentOS
+  * Fedora
+  * Amazon Linux 2
+  * OpenSUSE
+* Windows
+
+They can also be run directly on the operating system (using the WAR file) or on one of the following platforms:
+* Docker
+* Apache Tomcat (WAR file)
+
+Any operating system that supports the required Java version is eligible to be an agent.
+
+

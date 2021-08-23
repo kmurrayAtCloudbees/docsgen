@@ -1,0 +1,6 @@
+
+== Use Blue Ocean
+
+Although Blue Ocean can be used to create and maintain jobs, its real power is in visualizing jobs executions. It gives you the ability to drop right to an error in a job versus digging through the console log.
+
+Review the https://jenkins.io/doc/book/blueocean/[Blue Ocean] documentation for more details.

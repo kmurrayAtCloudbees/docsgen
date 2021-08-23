@@ -1,0 +1,5 @@
+
+== Artifact Manager for AWS
+
+
+https://docs.cloudbees.com/docs/admin-resources/latest/pipelines-user-guide/administering-jenkins-pipeline#ams3

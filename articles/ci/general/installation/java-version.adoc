@@ -1,0 +1,8 @@
+
+== Java Version
+
+You should install the latest version of Java 1.8.0 JDK or Server JRE (not Client JRE) that is available.
+
+If you install OpenJDK, make sure you install the `-devel` package:
+
+`sudo yum install java-1.8.0-openjdk-devel`

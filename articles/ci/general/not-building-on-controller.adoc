@@ -1,0 +1,6 @@
+
+== Don't build on CloudBees controller
+
+* If you have a more complex security setup that allows some users to only configure jobs, but not administer Jenkins, you need to prevent them from running builds on the controller node, otherwise they have unrestricted access into the JENKINS_HOME directory.
+** You can do this by setting the executor count to zero. Instead, make sure all jobs run on agents. This ensures that the CloudBees controller can scale to support many more jobs, and it also protects builds from modifying potentially sensitive data on $JENKINS_HOME accidentally/maliciously.
+** If you need some jobs to run on the controller (e.g. backups of Jenkins itself), use the Job Restrictions Plugin to limit which jobs can be executed there.

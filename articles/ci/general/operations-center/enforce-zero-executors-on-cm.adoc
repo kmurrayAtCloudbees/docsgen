@@ -1,0 +1,48 @@
+
+== Enforce zero executors on Controllers
+
+All jobs should run on agents and not on the controller. To ensure that this happens, you should enforce zero executors on the controller.
+
+Allowing items (i.e. projects or jobs) to execute directly on the Controller is a security risk since such projects/jobs could potentially access the file system and the build records of all previously run projects/jobs (which may contain sensitive information). Therefore, set this value to 0 to prevent any items from being executing directly on the Controller.
+
+There are three different ways that you can enforce this setting:
+
+* Directly on the Controller
+* Modify the Controller object on the Operations Center
+* Modify the Global Executor setting on the Operations Center
+
+=== Directly on the Controller
+
+* Click `Manage Jenkins`
+* Click `Configure System` under the `System Configuration` section
+* Set *# of executors* to 0
+* Click the `Save` button at the bottom of the page
+
+The downside to this configuration strategy is that you have to update the value on every controller.
+
+=== Modify the Controller object on the Operations Center
+
+On the Operations Center:
+
+* Hover over the Controller object, click the down arrow and select `Configure`
+* Under `On-controller executors`, select the *Enforce* checkbox
+* Enter 0 in the *# of executors* text box
+* Click the `Save` button
+
+Navigate to the Controller and verify that the Controller executors are gone. If they are not, give it a couple of minutes for the setting to apply from the Operations Center to the Controller.
+
+Much like the previous example, we are still setting the executor value on each Controller.
+
+=== Modify the Global Executor setting on the Operations Center
+
+On the Operations Center:
+
+* Click on `Manage Jenkins`
+* Click on `Configure Global Security` under the `Security` section
+* Scroll down to `Client Controller on-controller executors`
+* Select the *Enforce* checkbox
+* Uncheck the box for *Allow per-controller overrides* to make sure a Controller owner cannot make permanent changes on a Controller
+* Enter 0 in the *# of executors* textbox
+* Click the `Save` button
+
+The upside to using this approach is that any new Controller connected to the Operations Center will automatically have the executor count set to zero.

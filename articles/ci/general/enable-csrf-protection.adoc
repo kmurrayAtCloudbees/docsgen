@@ -1,0 +1,6 @@
+
+== Enable CSRF protection
+
+Cross site request forgery is a class of attack that forces an end user to execute unwanted actions on CloudBees CI. Because of the way this attack works, even CloudBees CI that's running inside a corporate firewall is vulnerable.
+
+For more information, review the https://support.cloudbees.com/hc/en-us/articles/219257077-CSRF-Protection-Explained[CSRF Protection Explained] knowledge base article.

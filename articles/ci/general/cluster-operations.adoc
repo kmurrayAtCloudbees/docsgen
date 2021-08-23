@@ -1,0 +1,10 @@
+
+== Cluster Operations
+
+Cluster Operations is a facility to perform maintenance operations on various items in CloudBees Jenkins Operation Center (CJOC), such as client controllers and update centers. Different operations are applicable to various items such as performing backups or restarts on client controllers, or upgrade/install plugins in update centers etc.
+
+The main way of running these operations is either via a custom project type, or some preset operations embedded at different locations in the Jenkins UI.
+
+=== Cluster Operation Projects
+
+You create a Cluster Operation Project in the same way as you would any other project in Jenkins, by selecting `New Item` in the view you want to create it in, giving it a name, and selecting `Cluster Operation` as the item type.

@@ -1,0 +1,4 @@
+
+== Setup a different job/project for each maintenance or development branch you create
+
+* One of advantages of using CI tools is to detect problems early in the development lifecycle. Setting up a different job/project for each branch you create will help to maximize the benefit of detecting problems early as part of supporting parallel development efforts and reducing risk.

@@ -1,0 +1,12 @@
+
+== Use Vendor supplied CLIs instead of plugins
+
+Since all jobs should get to `sh`, `bat`, or `powershell` as quickly as possible, you should take advantage of vendor provided CLIs instead of CloudBees CI plugins.
+
+For example, instead of using the Artifactory plugin to interact with Artifactory, you should instead use one of the following strategies in a `sh` step:
+
+* use the https://jfrog.com/getcli/[JFrog CLI]
+* use the https://maven.apache.org/plugins/maven-deploy-plugin/[Apache Maven Deploy Plugin] if you are using Maven
+* use the https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin[Gradle Artifactory Plugin] if you are using Gradle
+
+All three of these recommendations use a CLI (`jfrog`, `mvn`, `gradle`) to interact with Artifactory. By using a CLI, you are able to validate that a process works *outside* of CloudBees CI, making it easier to troubleshoot and maintain.

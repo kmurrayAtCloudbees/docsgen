@@ -1,0 +1,23 @@
+
+== Appendix C - Documentation
+
+The https://docs.cloudbees.com/[CloudBees Documentation] page contains documentation for all aspects of a CloudBees CI on traditional platforms environment, including installation, maintenance, and best practices.
+
+The following technical documents from our site may be useful along the way:
+
+* https://docs.cloudbees.com/docs/release-notes/latest/cloudbees-ci/#_traditional_platforms[Traditional platforms release notes]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-admin-guide/[CloudBees CI on traditional platforms administration guide]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/installing-client-masters[Installing Client Controllers]
+* https://docs.cloudbees.com/docs/cloudbees-common/latest/supported-platforms/cloudbees-ci-traditional#_supported_jdk_versions[Supported JDK versions]
+* https://support.cloudbees.com/hc/en-us/articles/222446987-Prepare-Jenkins-for-support[Prepare Jenkins for Support]
+ifeval::["{HA_MODE}" == "yes"]
+* https://support.cloudbees.com/hc/en-us/articles/217479948-NFS-Guide[NFS Guide]
+* https://support.cloudbees.com/hc/en-us/articles/236148867-How-to-set-up-a-F5-Load-Balancer-for-HA[How to set up a Load Balancer for HA?]
+* https://support.cloudbees.com/hc/en-us/articles/360034638071-Reverse-Proxy-troubleshooting-guide[Reverse Proxy troubleshooting guide]
+endif::[]
+ifeval::["{SELF_SIGNED_CERT}" == "yes"]
+* https://support.cloudbees.com/hc/en-us/articles/222098288-Set-up-SSL-on-a-CJP-environment-with-a-self-sign-SSL-certificate-on-each-Jenkins-box[Set-up SSL on a CJP environment with a self-sign SSL certificate on each Jenkins box]
+endif::[]
+* https://support.cloudbees.com/hc/en-us/articles/360028853171-Which-URLs-would-I-need-to-grant-access-to-for-my-firewall-or-proxy-[Which URLs would I need to grant access to for my firewall or proxy?]
+* https://github.com/jenkinsci/jenkins-scripts/blob/master/scriptler/checkNodesLauncherVersion.groovy[Script to check the .jar version and the Java version of the agents against the Controller versions]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-secure-guide/configuring-network-requirements[Network Requirements]

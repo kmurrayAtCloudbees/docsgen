@@ -1,0 +1,6 @@
+
+== Create Support Bundle after configuration changes
+
+Once you have finished the initial installation and configuration of CloudBees CI, create support bundles for each of the CloudBees CI products you have installed. For example, if you installed an Operations Center and three Controllers, you will create 4 support bundles.
+
+Next, create a support ticket and attach all the support bundles to the support ticket. If there are any issues found, CloudBees support will notify you of those issues.

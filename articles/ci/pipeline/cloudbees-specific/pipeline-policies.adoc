@@ -1,0 +1,10 @@
+
+== Pipeline Policies
+
+Organizations often need to enforce standards across their pipelines. As the number of projects and repositories increase within an organization, there is a higher chance of teams deviating from these rules or best practices developed by the shared services team.
+
+While administrators would like to enable their developers to use pipelines freely, they still may need to set some restrictions based on industry-specific regulatory compliance or general best practice principles.
+
+Pipeline Policies are runtime validations that work for both scripted and declarative pipelines and provide administrators a way to include warnings for or block the execution of pipelines that do not comply with certain regulatory requirements rules or best practice guidelines.
+
+For more information, read the official https://docs.cloudbees.com/docs/admin-resources/latest/pipelines/pipeline-policies[Pipeline Policies] documentation.

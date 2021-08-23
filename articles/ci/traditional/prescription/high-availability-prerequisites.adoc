@@ -1,0 +1,21 @@
+ifeval::["{HA_MODE}" == "yes"]
+== High Availability Prerequisites
+
+[width="100%",cols="3,1,3",options="header"]
+|==================================================================
+|Task |Completed? |Notes
+|A https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/high-availability#_load_balancer[load balancer] has been configured for this implementation | |
+ifeval::["{SSL_REQUIRED}" == "yes"]
+|SSL certificate(s) have been created | |
+endif::[]
+|Separate shared storage mount points have been created for the Operations Center and each Client Controller | |
+|==================================================================
+
+Shared storage, specifically NFSv4.1 needs to be made available for each HA pair. (NFS v3 is known to be performant, but is considered insecure in most environments.) Also, mount points have been created according to point 8 of the https://support.cloudbees.com/hc/en-us/articles/217479948-NFS-Guide[NFS Guide] to the shared storage from each HA instance.
+
+NOTE: The settings in point 8 are guidelines only and should be reviewed by your storage vendor and/or storage admin team in order to optimize for your specific environment.
+
+IMPORTANT: All storage backing NFS should be SSD only. Additional information can be found in the https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/high-availability#_shared_storage[Shared Storage] section of the CloudBees CI on traditional platforms installation guide.
+
+endif::[]
+

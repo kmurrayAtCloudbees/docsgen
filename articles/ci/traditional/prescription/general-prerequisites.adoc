@@ -1,0 +1,25 @@
+
+== General Prerequisites
+
+[width="100%",cols="3,1,3",options="header"]
+|==================================================================
+|Task |Completed? |Notes
+|The https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/[Installing CloudBees CI on traditional platforms] has been reviewed in preparation for the Quickstart Engagement.| |
+ifeval::["{HA_MODE}" == "yes"]
+|Servers have been provisioned with SSD storage and the hostname/IP addresses, type, role, OS, and HA role have been documented in the table in Appendix B.| |
+endif::[]
+ifeval::["{HA_MODE}" == "no"]
+|Servers have been provisioned with SSD storage and the hostname/IP addresses, type, role, and OS have been documented in the table in Appendix B.| |
+endif::[]
+|Validation has been completed that servers meet the sizing requirements provided by CloudBees as documented in Appendix A.| |
+|A common version of a https://docs.cloudbees.com/docs/cloudbees-common/latest/supported-platforms/cloudbees-ci-traditional#_supported_jdk_versions[CloudBees supported JDK] has been installed on servers and is set as the default version of Java, i.e. JAVA_HOME, on those servers.| |
+|Outbound HTTP access to the internet, whether direct or through a proxy, is available on all the servers.| |
+|Any build, SCM, or other tools needed have been installed and are ready for integration with CloudBees CI on traditional platforms. | |
+|https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-secure-guide/configuring-network-requirements[Network requirements] have been reviewed, and all needed ports have been opened. | |
+|A storage administrator has been identified and will be available during the CloudBees CI on traditional platforms installation process to handle any problems encountered during installation.| |
+|A network/firewall/proxy administrator has been identified and will be available during the CloudBees CI on traditional platforms installation process to handle any problems encountered during installation.| |
+|A system administrator has been identified and will be available during the CloudBees CI on traditional platforms installation process to handle any problems encountered during installation.| |
+|SSH access to all Linux servers outlined in Appendix A has been validated. | |
+|RDP access to all Windows servers outlined in Appendix A has been validated. | |
+|==================================================================
+

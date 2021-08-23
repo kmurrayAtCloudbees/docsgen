@@ -1,0 +1,6 @@
+
+== Use "file fingerprinting" to manage dependencies
+
+* When you have interdependent projects on Jenkins, it often becomes hard to keep track of which version of this is used by which version of that. Jenkins supports "file fingerprinting" to simplify this, so make best use of it.
+
+https://www.jenkins.io/doc/book/using/fingerprints/

@@ -1,0 +1,16 @@
+
+== Prevent resource collisions in jobs that are running in parallel
+
+* Multiple jobs running at the same time often cause collisions if they set up some kind of service, or need exclusive access. If your builds involve use of databases or other networked services, you need to ensure that they don't interfere with each other.
+
+** Allocate a different port for parallel project builds to avoid build collisions. If that's not possible (e.g. in the case of a persistent resource that needs to be locked) you can prevent builds that use it from running at the same time.
+
+==== Plugins that aid with preventing resource collisions
+
+====== *Throttle Concurrent Builds Plugin:*
+
+* https://docs.cloudbees.com/plugins/ci/throttle-concurrents
+
+====== *Lockable Resources Plugin:*
+
+* https://docs.cloudbees.com/plugins/ci/lockable-resources

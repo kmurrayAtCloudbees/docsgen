@@ -1,0 +1,27 @@
+
+== Only use pipeline job types
+
+When creating new jobs, only use pipeline job types:
+
+* Pipeline
+* Multibranch Pipeline
+
+If you are using either GitHub or Bitbucket as your SCM, you also have the following options:
+
+* GitHub Organization
+* Bitbucket Team/Project
+
+Although freestyle jobs support simple continuous integration by allowing you to define sequential tasks in an application lifecycle,
+they do not create a persistent record of execution, enable one script to address all the steps in a complex workflow, or confer the other advantages of pipelines.
+
+In contrast to freestyle jobs, pipelines enable you to define the whole application lifecycle. Pipeline
+functionality helps CloudBees CI to support continuous delivery (CD). The Pipeline plugin was built with requirements for a flexible,
+extensible, and script-based CD workflow capability in mind.
+
+Accordingly, pipeline functionality is:
+
+* Durable: Pipelines can survive both planned and unplanned restarts of your Controller.
+* Pausable: Pipelines can optionally stop and wait for human input or approval before completing the jobs for which they were built.
+* Versatile: Pipelines support complex real-world CD requirements, including the ability to fork or join, loop, and work in parallel with each other.
+* Efficient: Pipelines can restart from any of several saved checkpoints.
+* Extensible: The Pipeline plugin supports custom extensions to its DSL (domain scripting language) and multiple options for integration with other plugins.

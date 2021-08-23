@@ -1,0 +1,36 @@
+
+== Role Based Access Control
+
+
+=== Overview
+
+
+=== Configuration
+
+* Login to the CJOC
+* Click `Manage Jenkins`
+* Click `Configure Global Security` under the `Security` section
+* Scroll down to the ??? section
+* Select the ??? radio button
+* Select the `Initial ???` dropdown option to give you a starting point for your groups and roles
+* Click `Save`
+
+TODO: add picture here
+
+Now that you have saved your configuration, let's go take a look at the initial configuration.
+
+* Click `Groups`
+* Click `Administrators`
+* You should see that the user you are logged in as is now part of the `Administrators` group
+
+=== Groups
+
+
+=== Roles
+
+
+Two common use cases:
+
+* user can only see what they are supposed to see
+* user can see everything in read only mode
+

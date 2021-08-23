@@ -1,0 +1,8 @@
+
+== Set Performance Optimized as the default
+
+When setting up a Controller, set the default value for Pipeline durability to Performance Optimized:
+
+image::articles/best-practices/pipeline/general/images/durability-performance-optimized-selected.png[]
+
+For more information about Pipeline durability, refer to the https://jenkins.io/doc/book/pipeline/scaling-pipeline/#what-are-the-durability-settings[Scaling Pipeline] documentation.

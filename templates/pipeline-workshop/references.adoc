@@ -1,0 +1,43 @@
+
+== References
+
+=== Pipeline
+
+* https://jenkins.io/doc/book/pipeline/[Jenkins User Documentation for Pipeline]
+* https://jenkins.io/doc/book/pipeline/scaling-pipeline/[Scaling Pipelines]
+* https://jenkins.io/doc/book/pipeline/syntax/[Pipeline Syntax]
+* https://jenkins.io/doc/pipeline/steps/[Pipeline Steps Reference]
+* https://support.cloudbees.com/hc/en-us/articles/115000237071-How-do-I-set-discard-old-builds-for-a-Multi-Branch-Pipeline-Job-[How do I set discard old builds for a Multi Branch Pipeline Job?]
+* https://jenkins.io/doc/book/pipeline/development/#linter[Command-line Pipeline Linter]
+* https://jenkins.io/blog/2018/04/09/whats-in-declarative/[The new things arriving in Declarative Pipeline!] (from 9Apr2018)
+* https://jenkins.io/blog/2018/07/02/whats-new-declarative-piepline-13x-sequential-stages/[What's New in Declarative Pipeline 1.3: Sequential Stages]
+* https://jenkins.io/doc/book/pipeline/running-pipelines/#restart-from-a-stage[Restart from a Stage]
+
+=== Shared Libraries
+
+* https://jenkins.io/doc/book/pipeline/shared-libraries/[Extending with Shared Libraries]
+* https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/[Share a standard Pipeline across multiple projects with Shared Libraries]
+* http://docs.groovy-lang.org/docs/next/html/documentation/template-engines.html[Groovy Template engines] (refer to the `renderTemplate` custom step in Darin's shared library for more context)
+
+=== Tools for building Docker images without a Docker daemon
+
+* https://buildah.io/[Buildah]
+* https://github.com/GoogleContainerTools/kaniko[Kaniko]
+* https://github.com/GoogleContainerTools/jib[Jib]
+
+=== CloudBees specific features
+
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cross-team-collaboration[Cross Team Collaboration]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/external-http-endpoints[External HTTP Endpoints]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cje-ux#_command_line_interface[Team Creation Recipes]
+* https://docs.cloudbees.com/docs/admin-resources/latest/pipelines-user-guide/administering-jenkins-pipeline#_example_using_checkpoint_in_its_own_stage[Sample of using Checkpoint with Declarative Syntax]
+* https://docs.cloudbees.com/docs/admin-resources/latest/pipeline-templates-user-guide/[Pipeline Templates]
+** refer to https://github.com/darinpope/pipeline-template-catalogs[Darin's Pipeline Template Catalog] for an example
+
+=== Miscellaneous
+
+* https://jenkins.io/blog/2018/06/27/new-login-page/[New design, UX and extensibility digest for login page] (Blog post from 27Jun2018 about the changes to the login form)
+* https://github.com/cloudbees/jenkins-scripts/blob/master/ProperlyStopRunningPipelines.groovy
+* https://github.com/darinpope/jenkinsfile-library[Darin's library of example Jenkinsfiles]
+* https://github.com/darinpope/github-api-global-lib[Darin's Shared Library example]
+

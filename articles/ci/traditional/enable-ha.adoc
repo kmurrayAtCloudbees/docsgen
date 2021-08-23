@@ -1,0 +1,13 @@
+
+== Enable High Availability
+
+By default, the High Availability subsystem is enabled. In order to use this feature, you will need the following infrastructure:
+
+* At least 2 instances with the same hardware configuration for the CloudBees instances
+* A load balancer that can be configured with a health check. Examples of this are hardware based load balancers like F5 or Netscaler or software load balancers like HAProxy.
+* A NFS mount with the following parameters:
+** CloudBees engineering has validated NFS v4.1 and it is the recommended NFS version for all Jenkins environments. File storage vendors have reported to CloudBees customers that there are known performance issues with v4. NFS v3 is known to be performant, but is considered insecure in most environments.
+** The drive backing NFS has to be SSD. You should not use platter based drives for any CloudBees based work.
+** The NFS client needs to be configured according to step 8 of the https://support.cloudbees.com/hc/en-us/articles/217479948-NFS-Guide[NFS Guide]
+
+Refer to the https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-install-guide/high-availability[High Availability] documentation for more detailed information.

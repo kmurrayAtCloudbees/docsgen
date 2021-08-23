@@ -1,0 +1,94 @@
+
+== Appendix B - Server Details
+
+ifeval::["{HA_MODE}" == "yes"]
+
+[width="100%",cols="4,1,3,3",options="header"]
+|==================================================================
+|Host |Role |OS |HA Preferred Role
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp} |{zwsp}
+|==================================================================
+
+Host::
+    The hostname or IPv4 address of the machine
+
+ifeval::["{INCLUDE_ES}" == "yes"]
+
+Role::
+    one of "OC" (Operations Center), "CM" (Client Controller), "ES" (Elasticsearch) or "Agent"
+
+endif::[]
+
+ifeval::["{INCLUDE_ES}" == "no"]
+
+Role::
+    one of "OC" (Operations Center), "CM" (Client Controller), or "Agent"
+
+endif::[]
+
+OS::
+    operating system name
+HA Preferred Role (applies only to Operations Center and Client Controller)::
+    one of "primary" or "standby"
+
+endif::[]
+
+ifeval::["{HA_MODE}" == "no"]
+
+[width="100%",cols="4,1,3",options="header"]
+|==================================================================
+|Host |Role |OS
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|{zwsp} |{zwsp} |{zwsp}
+|==================================================================
+
+Host::
+    The hostname or IPv4 address of the machine
+
+ifeval::["{INCLUDE_ES}" == "yes"]
+
+Role::
+    one of "OC" (Operations Center), "CM" (Client Controller), "ES" (Elasticsearch) or "Agent"
+
+endif::[]
+
+ifeval::["{INCLUDE_ES}" == "no"]
+
+Role::
+    one of "OC" (Operations Center), "CM" (Client Controller), or "Agent"
+
+endif::[]
+
+OS::
+    operating system name
+
+endif::[]

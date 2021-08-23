@@ -1,0 +1,10 @@
+
+== How to restore a backup
+
+To restore a backup of a Controller, it's as simple as creating a `Backup and Restore` job on the Controller.
+
+If you are creating a new Controller to restore into, be sure to create a type of Controller that matches your backup. In other words, if you are restoring a Team Controller backup, you have to create a new Team Controller. If you are restoring a Managed Controller backup, you have to create a new Managed Controller.
+
+To restore a backup of an Operations Center, you have to use a https://docs.cloudbees.com/docs/admin-resources/latest/backup-restore/kubernetes#_using_a_rescue_pod[rescue pod].
+
+For more information about restoring backups, refer to the https://docs.cloudbees.com/docs/admin-resources/latest/backup-restore/[Backup and restore guide].

@@ -1,0 +1,6 @@
+
+== Datadog
+
+The Operations Center and Controllers expose a set of metrics in order to monitor and understand the state of the system.
+
+Follow the https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-monitoring-guide/datadog[Example monitoring implementation with Datadog] documentation to take full advantage of the integration.

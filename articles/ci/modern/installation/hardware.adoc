@@ -1,0 +1,7 @@
+
+== Hardware
+
+When planning worker node sizing for your cluster, keep in mind the following minimum requirements for both Operations Center and Managed Controller containers:
+
+* The minimum memory recommendation for a production controller is 6144MB (6GB).This is derived from a recommended minimum heap size of 4GB for production instances.
+* The standard disk size for each JENKINS_HOME directory is 50GB. Although that can be resized, it can only be sized upwards. If you want a smaller size, you can do that, but it must be done at the time of the creation of the Controller.

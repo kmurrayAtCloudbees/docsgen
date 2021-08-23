@@ -1,0 +1,6 @@
+
+== When to use a Team Controller, when to use a Managed Controller
+
+The New User Experience For CloudBees CI introduces the new concept of Team Controller. However, the Managed Controller is still available to users who require the classic approach.
+
+For more information, refer to https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cje-ux#_when_to_use_a_team_master_when_to_use_a_managed_master[When to use a Team Controller, when to use a Managed Controller].

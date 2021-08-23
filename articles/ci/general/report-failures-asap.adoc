@@ -1,0 +1,6 @@
+
+== Take steps to ensure failures are reported as soon as possible
+
+* For example, run a limited suite of smoke tests before running time consuming test suites.
+
+* Write jobs for your maintenance tasks, such as cleanup operations to avoid full disk problems.

@@ -1,0 +1,9 @@
+
+== RBAC made easy
+
+The Role-Based Access Control plugin gives a CloudBees administrator the ability to define various security roles that will apply to the system they administer.
+Once roles have been defined, the CloudBees administrator can assign those roles to groups of users.
+The assignment of roles can take place either at the global level, or limited to specific objects within the system.
+Additionally, the CloudBees administrator can even delegate the management of groups for specific objects to specific users.
+
+For a Basic RBAC Setup see: https://support.cloudbees.com/hc/en-us/articles/360016714631-How-can-I-make-a-basic-RBAC-setup

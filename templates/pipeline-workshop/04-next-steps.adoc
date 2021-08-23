@@ -1,0 +1,17 @@
+
+== Next Steps
+
+Listed below are the prioritized recommendations for {CUSTOMER_ABBR} to execute.
+
+NOTE: Be sure to read the detailed recommendations to determine any dependencies between items.
+
+* Set the default durability to "Performance-optimized"
+* Create custom tooling Docker images for agent usage
+* Create a single corporate shared library
+* Version the corporate shared library
+* Eliminate Script Approvals
+* Create command line tools to power custom steps
+* Uninstall any plugins that are not being used from your Team Controllers
+* Enforce the use of standardized and centralized pipelines
+
+The other recommendations can be implemented whenever you are ready.

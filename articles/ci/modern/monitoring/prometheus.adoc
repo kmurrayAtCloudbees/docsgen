@@ -1,0 +1,286 @@
+
+== Prometheus
+
+http://prometheus.io/[Prometheus] is often used as a workhorse for monitoring and alerting within Kubernetes clusters. The goal of this section is to show some of the steps required to build a monitoring and alerting solution for CloudBees CI on modern cloud platforms centered on Prometheus and Prometheus' https://prometheus.io/docs/alerting/alertmanager/[Alertmanager].
+
+NOTE: The example below assumes you are using `ingress-nginx`. If you are using a different ingress, modify the example for your environment.
+
+=== Prerequisites
+
+* A running CloudBees CI on modern cloud platforms installation
+* A domain name
+* A Slack API webhook configured
+
+=== Prepare
+
+We're going to put the Prometheus stack in the namespace `obs`, short for `Observability` (or o11y).
+
+[source,bash]
+----
+kubectl create namespace obs
+kubens obs
+----
+
+=== Prepare Domain Names
+
+[source,bash]
+----
+export PROM_ADDR=mon.${DOMAIN}
+export AM_ADDR=alertmanager.${DOMAIN}
+----
+
+=== Prometheus Values
+
+This is an example Prometheus configuration. For more details, please consult the Prometheus documentation.
+
+.prom-values.yml
+[source,yaml]
+----
+server:
+  ingress:
+    enabled: true
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 1000Mi
+    requests:
+      cpu: 10m
+      memory: 500Mi
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 5m
+      memory: 10Mi
+kubeStateMetrics:
+  resources:
+    limits:
+      cpu: 10m
+      memory: 50Mi
+    requests:
+      cpu: 5m
+      memory: 25Mi
+nodeExporter:
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 5m
+      memory: 10Mi
+pushgateway:
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 5m
+      memory: 10Mi
+serverFiles:
+  alerts:
+    groups:
+    - name: nodes
+      rules:
+      - alert: JenkinsToManyJobsQueued
+        expr: sum(jenkins_queue_size_value) by (com_cloudbees_cje_tenant) > 5
+        for: 3m
+        labels:
+          severity: notify
+        annotations:
+          summary: Jenkins to many jobs queued
+          description: A Jenkins instance is failing a health check
+alertmanagerFiles:
+  alertmanager.yml:
+    global: {}
+    route:
+      group_wait: 10s
+      group_interval: 5m
+      receiver: slack
+      repeat_interval: 3h
+      routes:
+      - receiver: slack
+        repeat_interval: 5d
+        match:
+          severity: notify
+          frequency: low
+    receivers:
+    - name: slack
+      slack_configs:
+      - api_url: "XXXXXXXXXX"
+        send_resolved: true
+        title: "{{ .CommonAnnotations.summary }}"
+        text: "{{ .CommonAnnotations.description }}"
+        title_link: http://example.com
+----
+
+
+=== Ingress Controller
+
+At the time of this was written (mid 2019), there seems to be an issue with `nginx-ingress` controller metrics in Prometheus when installed via Helm. If you experience the same, below is the installation for *GKE* which does yield metrics. We've included it, as it might give you clues in case you're stuck.
+
+When you do install `nginx-ingress` via Helm, be sure to enable the metrics: `--set controller.metrics.enabled=true`.
+
+[source,bash]
+----
+kubectl apply \
+    -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/mandatory.yaml
+
+kubectl apply \
+    -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/1cd17cd12c98563407ad03812aebac46ca4442f2/deploy/provider/cloud-generic.yaml
+----
+
+=== CloudBees CI Configuration
+
+To make sure Prometheus can scrape metrics from CloudBees CI Controllers and Operations Center, we need the following:
+
+* install the https://docs.cloudbees.com/plugins/ci/metrics[Metrics plugin]
+* install the https://docs.cloudbees.com/plugins/ci/prometheus[Prometheus plugin]
+* implement one of the following:
+** a Prometheus scrape job
+** annotations on the StatefulSet
+
+=== StatefulSet Snippet
+
+For Prometheus to scrape for metrics on a pod, it must either have a default `/metrics` endpoint which provides Prometheus style metrics or have annotations instructing Prometheus how.
+
+* *prometheus.io/path*: the path to the metrics (if not specified, `/metrics` is assumed)
+* *prometheus.io/port*: the port to use for scraping
+* *prometheus.io/scrape*: to scrape or not to scrape
+
+Unfortunately, these annotations cannot be automatically applied to the new Controllers because the unique name of the controller is part of the path.
+
+You can either patch the controller's StatefulSet after creation, or add below snippet in the raw yaml section when creating a controller (note, cannot be done for a Team Controller).
+
+[NOTE]
+====
+Replace `{UniqueControllerName}` with the unique name of the Controller.
+====
+
+[source,yaml]
+----
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+spec:
+  serviceName: "{UniqueControllerName}"
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /{UniqueControllerName}/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+----
+
+
+=== Install Prometheus
+
+This installs Prometheus, along with Alertmanager, with the values file earlier in this document.
+
+[source,bash]
+----
+helm upgrade -i prometheus \
+  stable/prometheus \
+  --namespace obs \
+  --version 7.1.3 \
+  --set server.ingress.hosts={$PROM_ADDR} \
+  --set alertmanager.ingress.hosts={$AM_ADDR} \
+  -f prom-values.yml
+----
+
+[source,bash]
+----
+kubectl -n obs \
+    rollout status \
+    deploy prometheus-server
+----
+
+=== Prometheus Queries
+
+Prometheus' queries can be quite arcane and take some effort to get right. We've included some examples. but for more details, read https://prometheus.io/docs/prometheus/latest/querying/basics/[Query Basics] and https://prometheus.io/docs/prometheus/latest/querying/examples/[Query Examples] in the Prometheus docs.
+
+If Prometheus successfully scrapes the Controllers and Operations Center, you will see additional metrics in the form of `jenkins_`.
+
+Some examples:
+
+* jenkins_health_check_count
+* jenkins_queue_size_value
+* jenkins_job_waiting_duration
+
+=== Jenkins HealthCheck count
+
+[source,bash]
+----
+sum(jenkins_health_check_count) by (com_cloudbees_cje_tenant)
+----
+
+
+=== Memory Usage
+
+[source,json]
+----
+sum(label_join(
+  container_memory_usage_bytes{
+    namespace="cloudbees-core"
+  },
+  "pod",
+  ",",
+  "pod_name"
+))
+by (pod) /
+sum(
+  kube_pod_container_resource_requests_memory_bytes{
+    namespace="cloudbees-core"
+  }
+)
+by (pod)
+----
+
+=== Ingress Performance
+
+This example shows x percent requests with durations within 0.5 seconds.
+
+If more and more requests are taking more than 0.5 seconds, you're probably looking at an instance that is very busy. It might be good to setup an alert when the amount of responses taking less than x seconds comes below a y threshold.
+
+[source,json]
+----
+sum(rate(
+  nginx_ingress_controller_request_duration_seconds_bucket{
+    le="0.5",
+    ingress=~"mm.*|cjoc|teams-.*"
+  }[5m]
+))
+by (ingress) /
+sum(rate(
+  nginx_ingress_controller_request_duration_seconds_count{
+    ingress=~"mm.*|cjoc|teams-.*"
+  }[5m]
+))
+by (ingress)
+----
+
+=== Alerts via Alertmanager
+
+As can be seen in the `prometheus-values.yaml` earlier in this chapter. There are ways to create alerts via Alertmanager in order to receive notifications of leading indicators of problems.
+
+=== Alertmanager too many jobs queued
+
+[source,yaml]
+----
+- alert: JenkinsToManyJobsQueued
+  expr: sum(jenkins_queue_size_value) by (com_cloudbees_cje_tenant) > 10
+  for: 5m
+  labels:
+    severity: notify
+  annotations:
+    summary: Jenkins to many jobs queued
+    description: A Jenkins instance has to many jobs in queue
+----

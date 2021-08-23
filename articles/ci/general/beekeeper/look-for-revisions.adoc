@@ -1,0 +1,10 @@
+
+== Look for revisions instead of full upgrades
+
+Since CloudBees has a full release every four to six weeks, it is more useful to know when there are revisions available for the version you have installed. This is especially important if you are not doing a full upgrade every month.
+
+In order to be able to access revisions after a new full version has been released, you need to add the following Java startup parameter:
+
+`-Dcb.BeekeeperProp.noFullUpgrade=true`
+
+Read the https://docs.cloudbees.com/docs/admin-resources/latest/assurance-program/#_system_properties[System Properties] documentation for more information.

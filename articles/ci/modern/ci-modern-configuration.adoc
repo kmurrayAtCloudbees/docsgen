@@ -1,0 +1,52 @@
+
+== Configuration
+
+:leveloffset: +1
+
+include::../general/user-activity-monitoring-plugin.adoc[]
+
+include::../general/advisor-plugin.adoc[]
+
+ifeval::["{INSTALLED_ON_AWS}" == "yes"]
+
+include::../general/artifact-manager-for-aws.adoc[]
+
+endif::[]
+
+include::../general/what-is-a-support-bundle.adoc[]
+
+include::../general/create-support-bundle-after-configuration.adoc[]
+
+include::../general/dont-use-plugins-for-jobs.adoc[]
+
+include::../general/enable-csrf-protection.adoc[]
+
+include::../general/is-your-plugin-maintained.adoc[]
+
+include::../general/only-use-pipeline-job-types.adoc[]
+
+include::../general/beekeeper/always-stay-enrolled.adoc[]
+
+include::../general/beekeeper/when-to-opt-out-of-cap.adoc[]
+
+include::../general/beekeeper/look-for-revisions.adoc[]
+
+include::../general/agents/java-version.adoc[]
+
+include::../general/operations-center/oc-backup.adoc[]
+
+include::../general/operations-center/cluster-op-cm-backups.adoc[]
+
+include::../general/restore.adoc[]
+
+include::../general/operations-center/enforce-zero-executors-on-cm.adoc[]
+
+include::../general/rbac-made-easy.adoc[]
+
+include::../general/managed-vs-team.adoc[]
+
+include::../general/pod-templates.adoc[]
+
+include::../general/pod-security-policy.adoc[]
+
+:leveloffset: -1

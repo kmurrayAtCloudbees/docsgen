@@ -1,0 +1,46 @@
+
+== Java version for agents
+
+The version of Java that used to connect an agent to a Controller should be the same as the version of Java that is running the Controller process.
+
+For example, if the Controller is being run with 1.8.0_265, the Java version on the agent should be 1.8.0_265.
+
+To validate that the Java versions are correct, you can run the following script in the Script console of a Controller:
+
+[source,groovy]
+----
+import hudson.remoting.Launcher
+import hudson.slaves.SlaveComputer
+import jenkins.model.Jenkins
+
+def expectedAgentVersion = Launcher.VERSION
+def expectedJavaVersion = System.getProperty("java.version")
+println "Controller"
+println " Expected Agent Version = '${expectedAgentVersion}'"
+println " Expected Java Version = '${expectedJavaVersion}'"
+Jenkins.instance.getComputers()
+        .findAll { it instanceof SlaveComputer }
+        .each { computer ->
+    println "Node '${computer.name}'"
+    if (!computer.getChannel()) {
+        println " is disconnected."
+    } else {
+        def isOk = true
+        def agentVersion = computer.getSlaveVersion()
+        if (!expectedAgentVersion.equals(agentVersion)) {
+            println " expected agent version '${expectedAgentVersion}' but got '${agentVersion}'"
+            isOk = false
+        }
+        def javaVersion = computer.getSystemProperties().get("java.version")
+        if (!expectedJavaVersion.equals(javaVersion)) {
+            println " expected java version '${expectedJavaVersion}' but got '${javaVersion}'"
+            isOk = false
+        }
+
+        if(isOk) {
+            println " OK"
+        }
+    }
+}
+return;
+----

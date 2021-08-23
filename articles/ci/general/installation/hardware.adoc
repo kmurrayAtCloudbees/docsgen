@@ -1,0 +1,19 @@
+
+== Hardware
+
+For Operations Center and Client Controllers, you should acquire the following hardware with the following minimum requirements:
+
+* 4 CPU
+* 16GB RAM
+* Minimum of 50GB of HDD. (Actual size will vary based on numerous variables)
+
+NOTE: Every piece of CloudBees infrastructure should reside on it's own piece of hardware. Said differently, the *only* software running on an instance should be a single instance CloudBees software.
+
+For agents:
+
+* 2 CPU
+* 8GB RAM
+* Minimum of 50GB of HDD. (Actual size will vary based on numerous variables)
+
+IMPORTANT: For performance reasons, all HDDs should be SSD. We have found that platter based drives rarely meet the performance expectations of clients.
+

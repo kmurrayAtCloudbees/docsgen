@@ -1,0 +1,26 @@
+
+== Preparing CloudBees For Support
+
+There are numerous best practices for CloudBees CI on traditional platforms documented in the https://support.cloudbees.com/hc/en-us/articles/222446987-Prepare-Jenkins-for-Support[Prepare Jenkins for Support] knowledge base article. Here are a couple of the key items from that article:
+
+=== Ulimit settings for the Operations Center and Client Controllers
+
+Prior to installing CloudBees, create a file, i.e. `/etc/security/limits.d/30-cloudbees.conf` that has the following values:
+
+[source,bash]
+----
+jenkins soft core unlimited
+jenkins hard core unlimited
+jenkins soft fsize unlimited
+jenkins hard fsize unlimited
+jenkins soft nofile 4096
+jenkins hard nofile 8192
+jenkins soft nproc 30654
+jenkins hard nproc 30654
+----
+
+NOTE: Replace `jenkins` with the user that is running the CloudBees process. By default, if you install via `yum`, the user for Operations Center is `cloudbees-core-oc` and Client Controller is `cloudbees-core-cm`. You may have created your own user to run your processes. If so, use that user in place of `jenkins`.
+
+=== Configure Your Java Parameters
+
+Once you have CloudBees installed, be sure to tune your JVM settings according to the `Java Parameters` section. Although a small section, the `Heap Size` section contains the most critical settings, `-Xms` and `-Xmx`. Depending on how you set those values will determine the other values you need to set. The article explains all the different options. If you have any questions on the proper Java parameter values for your environment, open a support ticket for more help.

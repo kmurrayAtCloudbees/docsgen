@@ -1,0 +1,16 @@
+
+== Executive Summary
+
+=== Context
+
+CloudBees spent the week with {CUSTOMER_ABBR} to enable them on the best practices for operating CloudBees CI on traditional platforms. We discussed many items ranging from installation and configuration to containerization strategies for agents.
+
+This document contains best practices that CloudBees has seen throughout numerous industries.
+
+ifeval::["{SOW_ID}" != ""]
+
+=== Completion of Work
+
+include::../../articles/legal/burndown-notice.adoc[]
+
+endif::[]

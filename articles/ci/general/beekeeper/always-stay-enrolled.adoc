@@ -1,0 +1,6 @@
+
+== Always Stay Enrolled in CloudBees Assurance Program
+
+In order to ensure the most stability for your Operations Center and Controllers, always keep them enrolled in the CloudBees Assurance Program. When you look at the Beekeeper page, it should always be "blue" and "green" and should look something like:
+
+image::images/bk-blue-green.png[width=800]

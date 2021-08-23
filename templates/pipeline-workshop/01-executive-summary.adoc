@@ -1,0 +1,22 @@
+
+== Executive Summary
+
+=== Context
+
+CloudBees spent part of the week with the {TEAM_NAME} to assess the level of pipeline maturity within {CUSTOMER_ABBR}. We discussed numerous items ranging from the use of marker files to pipeline best practices.
+
+This document contains recommendations for implementing best practices that CloudBees has seen throughout numerous industries.
+
+=== Top Recommendations Summary
+
+* <<#rec1,Open up the firewall to allow webhooks to be used with GitHub>>
+* <<#rec2,Create a single corporate shared library>>
+* <<#rec3,Enforce the use of standardized and centralized pipelines>>
+
+ifeval::["{SOW_ID}" != ""]
+
+=== Completion of Work
+
+include::../../../articles/post-engagement/legal/burndown-notice.adoc[]
+
+endif::[]

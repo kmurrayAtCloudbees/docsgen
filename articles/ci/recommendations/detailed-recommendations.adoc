@@ -1,0 +1,11 @@
+== Detailed Recommendations
+
+include::upgrade-strategy.adoc[]
+
+include::
+
+include::
+
+include::
+
+include::

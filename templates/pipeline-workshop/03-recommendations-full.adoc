@@ -1,0 +1,133 @@
+
+== Detailed Recommendations
+
+[#rec2]
+=== Create a single corporate shared library
+
+{CUSTOMER_ABBR} should have a single corporate shared library that encapsulates all functionality related to build, deployment to environments, and any associated compliance steps. However, the approach to creating this library should probably be a little different that you would expect. Instead of it being directly managed by the {TEAM_NAME}, all teams should work together on creating what they believe is the right way to do certain tasks, eliminating the "bottleneck" that the {TEAM_NAME} could (and would probably) become. This also provides a more global ownership within the company instead of the library being something mandated from on high.
+
+The corporate shared library should follow a https://guides.github.com/introduction/flow/[GitHub flow] development process in order to keep the process simple.
+
+In order to support a transition time, create a few custom steps that everyone could use to start. Simple examples could be something like:
+
+* https://github.com/darinpope/github-api-global-lib/blob/master/vars/gitAuthorName.groovy[gitAuthorName]
+* https://github.com/darinpope/github-api-global-lib/blob/master/vars/gitAuthorEmail.groovy[gitAuthorEmail]
+
+That way teams can start using a few simple custom steps now before introducing the more feature rich library in the future.
+
+=== Version the corporate shared library
+
+Once the corporate shared library is created, it should be versioned. The plan should be to have 3 versions that are supported:
+
+* `experimental` (in alignment with the previous GitHub flow recommendation...the `main` branch)
+* `stable`
+* the previous `stable`
+
+As new versions are released, the Global Shared Library default version should be updated to the tag of the latest stable release.
+
+One example to potentially base your versioning scheme on is from https://github.com/jenkins-x/jx/releases[jenkins-x/jx]. Once a new release is made stable and the default value for the Global Pipeline Library has been updated, it will be critical to notify users of the change.
+
+Since only three versions should be supported, there will probably need to be a scan made of all repositories in GitHub to find anyone that is using a version that is not one of the supported versions and then decide how to deal with that situation. If after a scan you find a team is not using a supported version and are having issues, then you will have to decide on how you are going to support them. That will be the "product" side of the ownership of the corporate shared library.
+
+Let's combine this recommendation together with the previous one. Let's assume the 4 teams work together in an open source model. They effectively own and support the `experimental` version. The {TEAM_NAME} would also be part of the open source side of the project by contributing the compliance custom steps and processes. However, unlike the other teams, the {TEAM_NAME} would own both the `stable` and previous `stable` releases, effectively making them the "commercial" product owners of the corporate shared library.
+
+=== Eliminate Script Approvals
+
+There should be an expectation set with all teams that if that team has written a pipeline that requires a script approval, that request will be categorically denied. In order to solve this issue, the code that requires that script approval needs to be rewritten to no longer require an approval. The typical strategy to solve this issue is to externalize the call to a `sh` step.
+
+[#rec3]
+=== Enforce the use of standardized and centralized pipelines
+
+Instead of allowing each development group to create their own pipeline that does the same work, the {TEAM_NAME} should work with each group to determine what the needs are and work with the team to implement them in such a way that all compliance concerns are covered as well as covering all functional needs for each group.
+
+For example, there should only be one way that a Docker image is built and pushed to ECR. Likewise, there should be only one way that a Docker image is deployed to {K8S_PLATFORM}. By producing these common pipelines, compliance is much easier to enforce and attain.
+
+This process may work for many of your customers, but some of your customers will complain that this process will slow them down. In these scenarios, bring these customers "onto your team" for the time it takes to make sure that their needs are met as well as the needs of compliance and security.
+
+One of the other reasons that {CUSTOMER_ABBR} needs to implement this recommendation is that the {TEAM_NAME} operates the CloudBees infrastructure. By enforcing the following best practices:
+
+* eliminate all non-pipeline (freestyle, Maven project type, etc) jobs
+* eliminate most all non-default installed plugins
+* only use declarative pipeline syntax jobs with {CUSTOMER_ABBR} blessed shared libraries
+
+the {TEAM_NAME} can operate a more reliable CloudBees infrastructure for their customers, as well as be able to keep the CloudBees infrastructure more easily up to date since there will be very few, if any, extra job related plugins that can cause problems on upgrades.
+
+=== Create command line tools to power custom steps
+
+To stay in line with the idea of "how do we do (fill in the blank) from the command line?", create command line tools to add functionality that eliminates the need to have to write logic with scripted syntax that runs on the Team Controller. This could be implemented in a number of ways:
+
+* scripts (shell, Python, Groovy, etc)
+* custom CLI written in the language of your choice (Java, Go, etc)
+
+By creating these types of tools, you'll also be able to write tests for each of these tools without having to have any ties to your Team Controller.
+
+=== Uninstall any plugins that are not being used from your Team Controllers
+
+Once custom steps have been created that eliminate the need for a plugin (such as the Artifactory plugin), uninstall those plugins. You should work towards having as few plugins installed as possible to make ongoing upgrades of your CloudBees infrastructure as simple and risk-free as possible.
+
+In a perfect world, the only plugins that should be added to a {CUSTOMER_ABBR} Team Controller should be:
+
+* https://docs.cloudbees.com/docs/admin-resources/latest/plugins/cloudbees-jenkins-advisor[Jenkins Health Advisor by CloudBees]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cross-team-collaboration#cross-team[The Cross Team Collaboration plugins]
+** notification-api
+** pipeline-event-step
+** operations-center-notification
+* https://docs.cloudbees.com/docs/cloudbees-devoptics/latest/install-guide/[DevOptics]
+* https://docs.cloudbees.com/docs/admin-resources/latest/plugins/user-activity-monitoring[User Activity Monitoring]
+* https://docs.cloudbees.com/plugins/ci/saml[SAML]
+* https://docs.cloudbees.com/plugins/ci/basic-branch-build-strategies[Basic Branch Build Strategies]
+
+If someone believes another plugin should be installed, the initial answer should be "no" pending review of what the plugin actually does. If all the plugin does is make an HTTP call to an API endpoint, instead of using the plugin, a custom step should be written that makes a `curl` call to the API endpoint.
+
+=== Do not install any plugins on the Operations Center
+
+The Operations Center is a custom built Controller that manages other Controllers. The only extra plugins that should be installed on a {CUSTOMER_ABBR} Operations Center are:
+
+* https://docs.cloudbees.com/docs/admin-resources/latest/plugins/cloudbees-jenkins-advisor[Jenkins Health Advisor by CloudBees]
+* https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/external-http-endpoints#external-http-endpoints[The External HTTP Endpoints plugins]
+** notification-api
+** operations-center-notification
+** external-notification-plugin
+* https://docs.cloudbees.com/docs/cloudbees-devoptics/latest/install-guide/[DevOptics]
+* https://docs.cloudbees.com/docs/admin-resources/latest/plugins/user-activity-monitoring[User Activity Monitoring]
+* https://docs.cloudbees.com/plugins/ci/saml[SAML]
+
+=== Set the default durability to "Performance-optimized"
+
+For all Controllers, set the default value of *Pipeline Speed/Durability Settings* in `Manage Jenkins` -> `Configure System` to `Performance-optimized`. For more information about pipeline durability, refer to the https://jenkins.io/doc/book/pipeline/scaling-pipeline/[Scaling Pipelines] documentation.
+
+=== Create custom tooling Docker images for agent usage
+
+There are times when a vendor does not provide an official Docker image that has their CLI tooling. At that time, you will need to create custom tooling images to meet a team's specific needs.
+
+However, do not create "kitchen sink" images. Only create images that have the exact tooling that is necessary.
+
+For example, you may need an Ansible CLI image that also has the AWS CLI because you need to use an AWS credential with the Ansible CLI. This would be a valid use case of having multiple tools within a single image. However, don't create an image that has Ant, Maven, Gradle, NPM, and Grunt all in one image. Each of these instances should be separate images.
+
+=== Add missing functions to your toolchains
+
+Consider adding the following functions that don't exist in your toolchain today:
+
+* continuous code review tool, such as https://www.sonarqube.org/[SonarQube]
+* continuous security and artifact analysis tool, such as https://jfrog.com/xray/[JFrog's Xray] (recommended since you are already a user of Artifactory)
+* automated load testing tool
+* ITSM tool, such as https://www.servicenow.com/[ServiceNow] or https://www.cherwell.com/[Cherwell]
+
+There are numerous open source and commercial offerings for each of these tools.
+
+[#rec1]
+=== Open up the firewall to allow webhooks to be used with GitHub
+
+In order for jobs to be automatically triggered on a push to GitHub, the firewall must be opened between GitHub.com and {CUSTOMER_ABBR}'s {K8S_PLATFORM} cluster where CloudBees CI is installed.
+
+In https://help.github.com/en/articles/about-githubs-ip-addresses[About GitHub's IP addresses], GitHub has an endpoint (https://api.github.com/meta) that contains the valid CIDR ranges from where the hooks are published. These are the only IPs that should be allowed from GitHub.
+
+There is also an article titled https://www.cloudbees.com/blog/getting-webhooks-behind-firewall-yours[Getting Webhooks Behind that Firewall of Yours] that might give you another option if the meta solution from above is not allowed.
+
+ifeval::["{PS_PITCH}" == "yes"]
+
+=== Consider a followup engagement with CloudBees Professional Services
+
+Several months after having everything in production, consider having another engagement with CloudBees Professional Services to work with other teams that have more complex scenarios that cannot be easily solved based on the existing work with the Hudson and Thunderbirds teams.
+
+endif::[]

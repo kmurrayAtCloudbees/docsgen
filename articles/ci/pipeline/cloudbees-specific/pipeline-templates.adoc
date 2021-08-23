@@ -1,0 +1,10 @@
+
+== Pipeline Templates
+
+Organizations operating at scale need consistency to prevent chaos. If each development team in your organization is creating their own Pipelines according to their own standards, that’s a recipe for disaster.
+
+CloudBees Pipeline Templates give your organization the ability to enforce consistency. A small team can determine what Pipeline options are appropriate for your needs, and all of your development teams can choose from one of those options when they set up a software delivery project.
+
+That way, your developers can focus on shipping product, and your organization can standardize the Pipelines they use to do it.
+
+For more information, read the official https://docs.cloudbees.com/docs/admin-resources/latest/pipeline-templates-user-guide/[Pipeline Templates] documentation.

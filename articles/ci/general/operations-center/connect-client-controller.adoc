@@ -1,0 +1,4 @@
+
+== How to connect a Client Controller to the Operations Center
+
+As you create new Client Controllers, you should connect them to the Operations Center so they can be easily managed. Read the https://docs.cloudbees.com/docs/cloudbees-ci/latest/traditional-admin-guide/external-masters[Adding external Client Controllers] documentation for more details.

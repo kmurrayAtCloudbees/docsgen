@@ -1,0 +1,4 @@
+
+=== Require training for anyone developing pipelines
+
+All pipeline developers in {CUSTOMER_ABBR} should go through the official CloudBees pipeline training and any specific training that {CUSTOMER_ABBR} also creates. That way pipeline developers will be aware of the best practices that are expected and will be enforced throughout {CUSTOMER_ABBR}.

@@ -1,0 +1,18 @@
+
+== Pod Templates
+
+CloudBees CI leverages the scaling abilities of Kubernetes to schedule build agents. Kubernetes build agents are contained in pods, where a pod is a group of one or more containers sharing a common storage system and network. A pod is the smallest deployable unit of computing that Kubernetes can create and manage.
+
+Pods are defined using pod templates.
+
+One of the containers hosts the actual Jenkins build agent (the slave.jar file). By convention, this container always exists, and has the name `jnlp`. If needed, this may be overridden by specifying a container with the name `jnlp`.
+
+Other containers can be specified and the keyword container in a pipeline permits you to run commands directly inside these containers.
+
+The agent workspace is shared between all pod containers, allowing you to smoothly switch between them during a build.
+
+CloudBees CI offers several options to create pod templates, depending on the target audience: globally, using Operations Center, per-team, using controllers, as a shared library resource, or per-pipeline.
+
+For more information about pod templates, refer to https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/agents#kubernetes-agents[Kubernetes agents].
+
+For more information about pod templates as a shared library resource, refer to https://support.cloudbees.com/hc/en-us/articles/360033535231-Kubernetes-using-external-pod-description-yaml

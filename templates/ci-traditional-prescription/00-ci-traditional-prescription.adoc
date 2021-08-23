@@ -1,0 +1,27 @@
+= {CUSTOMER_NAME}: CloudBees CI on traditional platforms Customer Installation Checklist
+{CONSULTANT_NAME}
+v1.0, {DOC_DATE}
+:doctype: book
+:icons: font
+
+include::../../articles/ci/traditional/prescription/infrastructure-prerequisites.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/prescription/general-prerequisites.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/prescription/high-availability-prerequisites.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/prescription/appendix-a.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/prescription/appendix-b.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/prescription/appendix-c.adoc[]

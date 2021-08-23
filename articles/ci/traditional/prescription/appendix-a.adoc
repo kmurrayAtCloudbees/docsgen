@@ -1,0 +1,42 @@
+
+== Appendix A - Server Requirements
+
+The table below has the *minimum* sizing for each component of a production CloudBees CI on traditional platforms installation. Your CPU and RAM sizing might be different if you are migrating from an existing installation. If your existing configuration is larger than the recommendations, start with your existing configuration. If you are using an instance provided by a cloud provider, such as AWS or Azure, select the instance size that matches the number of CPUs listed below.
+
+NOTE: All the instances below should use SSD for their storage.
+
+ifeval::["{HA_MODE}" == "yes"]
+
+[width="100%",cols="1,1,1,1,1,1,4",options="header"]
+|==================================================================
+|Node |Qty |CPU |RAM |Local Disk |Shared Disk | Notes
+ifeval::["{INCLUDE_PROXY}" == "yes"]
+|Proxy |2 |1 |2GB |5GB |N/A | CloudBees recommends the use of hardware based load balancing, or proxy servers set up in a fault tolerant configuration.
+endif::[]
+|Operations Center |{SR_PROD_CJOC_QTY} |4 |16GB |10GB |20GB |
+|Client Controller |{SR_PROD_CJM_QTY} |4 |16GB |20GB |500GB+ |Space depends on number of builds, archive strategy and published asset sizes.
+ifeval::["{INCLUDE_ES}" == "yes"]
+|ES |{SR_PROD_ES_QTY} |4 |32GB |200GB |N/A |ES is very memory and I/O heavy.
+endif::[]
+|Agents |{SR_PROD_AGENT_QTY} |2 |8GB |50GB+ |N/A |
+|==================================================================
+
+endif::[]
+
+ifeval::["{HA_MODE}" == "no"]
+
+[width="100%",cols="1,1,1,1,1,4",options="header"]
+|==================================================================
+|Node |Qty |CPU |RAM |Local Disk |Notes
+ifeval::["{INCLUDE_PROXY}" == "yes"]
+|Proxy |2 |1 |2GB |5GB | CloudBees recommends the use of hardware based load balancing, or proxy servers set up in a fault tolerant configuration.
+endif::[]
+|Operations Center |{SR_PROD_CJOC_QTY} |4 |16GB |10GB |
+|Client Controller |{SR_PROD_CJM_QTY} |4 |16GB |50GB+ |Space depends on number of builds, archive strategy and published asset sizes.
+ifeval::["{INCLUDE_ES}" == "yes"]
+|ES |{SR_PROD_ES_QTY} |4 |32GB |200GB |ES is very memory and I/O heavy.
+endif::[]
+|Agents |{SR_PROD_AGENT_QTY} |2 |8GB |50GB+ |
+|==================================================================
+
+endif::[]

@@ -1,0 +1,8 @@
+
+== Is your plugin maintained?
+
+There are many plugins available for CloudBees CI. The following link allows you to identify details relating to each, including information such as their tier level, for example "verified" plugins which are part of the CloudBees Assurance Program (CAP):
+
+https://docs.cloudbees.com/plugins/ci
+
+It is important to use plugins sparingly. Where possible, only use CAP Verified plugins. Avoid the overuse of plugins where other solutions, such as a custom step in a Shared Library, may provide a simpler and more maintainable solution.

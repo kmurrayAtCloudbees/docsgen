@@ -1,0 +1,8 @@
+
+== Disable High Availability
+
+By default, the High Availability subsystem is enabled. While you are not using the High Availability feature, you should disable it.
+
+In order to disable it, you will need to add the following Java parameter to your startup process:
+
+`-Dcom.cloudbees.jenkins.ha=false`

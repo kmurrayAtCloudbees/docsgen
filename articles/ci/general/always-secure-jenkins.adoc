@@ -1,0 +1,6 @@
+
+== Always secure CloudBees CI
+
+*This best practice is around authenticating users and enforcing access control on a CloudBees instance.* +
+
+* In the default configuration, CloudBees CI does not perform any security checks. This means any person accessing the website can *execute arbitrary code on the Controller and all connected agents*, including *extracting all your passwords, certificates, and other private data*, besides just configure CloudBees and jobs, and perform builds. This configuration is only acceptable for use in (very small) intranets, and test setups.

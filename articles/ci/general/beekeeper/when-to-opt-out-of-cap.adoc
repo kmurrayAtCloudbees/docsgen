@@ -1,0 +1,6 @@
+
+== When to Opt Out of CloudBees Assurance Program
+
+There may be some situations where you need to opt out of CAP in order to upgrade a specific plugin to get a fix that you need. If you do that, install the plugin and then re-enroll in CAP as quickly as possible.
+
+*WARNING: You should only do this when you are instructed by CloudBees support.*

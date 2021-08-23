@@ -1,0 +1,6 @@
+
+== Cross Team Collaboration
+
+The Cross Team Collaboration feature is designed to greatly improve team collaboration by connecting team Pipelines to deliver software faster. It essentially allows a Pipeline to create a notification event which will be consumed by other Pipelines waiting on it.
+
+For more information, read the official https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/cross-team-collaboration[Cross Team Collaboration] documentation.

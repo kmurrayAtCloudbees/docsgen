@@ -1,0 +1,17 @@
+
+== Configure TcpSlaveAgentListener values
+
+Add the following Java parameters to your startup process:
+
+* `-Dhudson.TcpSlaveAgentListener.hostName=<hostname>`
+* `-Dhudson.TcpSlaveAgentListener.port=<JNLP port>`
+
+where:
+
+* `<hostname>` is either the IP address or hostname of the machine you are on
+* `<JNLP port>` is the value of the port under `Manage Jenkins` -> `Security` -> `Configure Global Security` -> `Agents`. By default, this is `50000`.
+
+For example, if the hostname is `cc01.mydomain.com` and the port is `50000`, the configuration will be:
+
+`-Dhudson.TcpSlaveAgentListener.hostName=cc01.mydomain.com -Dhudson.TcpSlaveAgentListener.port=50000`
+

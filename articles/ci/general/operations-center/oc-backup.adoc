@@ -1,0 +1,21 @@
+
+== How to properly backup an Operations Center
+
+In order to properly take a full backup of an Operations Center, on the Operations Center:
+
+* Click `New Item`
+* Enter the name `oc-backup` in the *Enter an item name* text box
+* Select the `Backup and Restore` job type
+* Click the `OK` button
+* Scroll down to the `Build` section
+* Click on `Add build step` and select `Take backup`
+** *What to back up?*: select all 3 check boxes
+** *Where to back up?*: select the backup location that is best for your environment
+** *Backup retention*: select the strategy that is best for you. Most people select the `Keep last N backups` option
+** *Format of backup*: select the format you prefer
+* Click on the `Advanced` button
+** *Skip recently modified files*: leave set to `Off`
+** *Wait and block during backup?*: most people leave this unchecked. However, you can choose to enable it. If enabled, the backup won't start unless there are job running and no job will run while the backup is running.
+* Click the `Save` button
+
+You can optionally schedule the job by configuring the *Build periodically* section.

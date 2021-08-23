@@ -1,0 +1,4 @@
+
+== Backup Jenkins Home regularly
+
+* Between archived builds, build logs that let you determine exactly what happened, and the SCM history information that tells you exactly what was built, Jenkins contains a lot of information you don't want to lose.

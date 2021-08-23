@@ -1,0 +1,29 @@
+
+== How to backup Controllers using a Cluster Operation
+
+The Operations Center has a job type that makes it simple to backup all Controllers that are connected to it.
+
+On the Operations Center:
+
+* Click `New Item`
+* Enter the name `controllers-backup` in the *Enter an item name* text box
+* Select the `Cluster Operations` job type
+* Click the `OK` button
+* Scroll down to the `Operations` section
+* Click on the `Add Operation` button and select `Controllers`
+* Under `Target Controllers`
+** *Source*: select *From Operations Center Root*
+** *Filters*: add the *Client Controller/Managed Controller Is Online* filter
+* Under `Steps`
+** Click on `Add Step` and select `Backup Controller`
+*** *What to back up?*: select all 3 check boxes
+*** *Where to back up?*: select the backup location that is best for your environment
+** *Backup retention*: select the strategy that is best for you. Most people select the `Keep last N backups` option
+* Click on the `Advanced` button
+** *Format of backup*: select the format you prefer
+** *Skip recently modified files*: leave set to `Off`
+* Click the `Save` button
+
+You can optionally schedule the job by configuring the *Build periodically* section.
+
+NOTE: The Cluster Operation does not *do* the backup of the controllers. Rather, it tells each Controllers to back itself up using the configuration in the cluster operation.

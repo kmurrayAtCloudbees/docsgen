@@ -1,0 +1,27 @@
+= {CUSTOMER_NAME}: CloudBees CI on modern cloud platforms Best Practices
+{CONSULTANT_NAME}
+v1.0, {DOC_DATE}
+:toc: right
+:doctype: book
+
+:icons: font
+
+include::01-executive-summary.adoc[]
+
+
+<<<
+
+include::../../articles/ci/modern/ci-modern-installation.adoc[]
+
+<<<
+
+include::../../articles/ci/modern/ci-modern-configuration.adoc[]
+
+<<<
+
+include::../../articles/ci/modern/ci-modern-monitoring.adoc[]
+
+<<<
+
+include::../../articles/ci/pipeline/pipeline.adoc[]
+

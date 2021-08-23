@@ -1,0 +1,6 @@
+
+== External HTTP Endpoints
+
+External HTTP endpoints work with Cross Team Collaboration to enable external systems, such as GitHub or Nexus, to generate notification events for Pipelines. Custom JSON webhooks can also be created to interact with External HTTP endpoints.
+
+For more information, read the official https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-admin-guide/external-http-endpoints[External HTTP Endpoints] documentation.

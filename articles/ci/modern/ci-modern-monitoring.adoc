@@ -1,0 +1,14 @@
+
+== Monitoring
+
+Below are some examples of how to monitor CloudBees CI on modern cloud platforms.
+
+:leveloffset: +1
+
+include::../general/elasticsearch-reporter.adoc[]
+
+include::monitoring/datadog.adoc[]
+
+include::monitoring/prometheus.adoc[]
+
+:leveloffset: -1

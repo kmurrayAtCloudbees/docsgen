@@ -1,0 +1,10 @@
+
+include::general/declarative-vs-scripted.adoc[]
+
+include::general/eliminate-script-approvals.adoc[]
+
+include::general/set-performance-optimized-as-default.adoc[]
+
+include::general/use-a-shared-library.adoc[]
+
+include::general/use-vendor-supplied-clis.adoc[]

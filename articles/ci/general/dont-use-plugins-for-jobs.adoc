@@ -1,0 +1,6 @@
+
+== Don't have dependencies on plugins for jobs
+
+Instead of having dependencies on plugins in your jobs, you should use vendor provided CLIs or scripts that can be executed within `sh`, `bat`, or `powershell` steps.
+
+All the plugins you really need to execute jobs are included in the plugins that are installed when you select the "Install Suggested Plugins" button during the installation process.

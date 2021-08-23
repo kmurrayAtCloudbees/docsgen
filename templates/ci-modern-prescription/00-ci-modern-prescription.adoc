@@ -1,0 +1,14 @@
+:IS_OPENSHIFT: no
+:IS_ON_PREMISE: no
+
+= {CUSTOMER_NAME}: CloudBees CI on modern cloud platforms Engagement Customer Checklist
+{CONSULTANT_NAME}
+v1.0, {DOC_DATE}
+:doctype: book
+
+:icons: font
+
+include::../../articles/ci/modern/prescription/overview.adoc[]
+
+include::../../articles/ci/modern/prescription/installation-todo-list.adoc[]
+

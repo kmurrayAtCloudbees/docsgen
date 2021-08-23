@@ -1,0 +1,10 @@
+
+include::cloudbees-specific/checkpoints.adoc[]
+
+include::cloudbees-specific/cross-team-collaboration.adoc[]
+
+include::cloudbees-specific/external-http-endpoints.adoc[]
+
+include::cloudbees-specific/pipeline-templates.adoc[]
+
+include::cloudbees-specific/pipeline-policies.adoc[]

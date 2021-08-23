@@ -1,0 +1,8 @@
+
+== Use a Shared Library
+
+Instead of creating plugins or performing a lot of copy/paste to create jobs, you should use Shared Libraries to keep things simple and DRY.
+
+Read the official https://jenkins.io/doc/book/pipeline/shared-libraries/[Shared Library] documentation for more details.
+
+For a more advanced example, review the https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/[Share a standard Pipeline across multiple projects with Shared Libraries] blog post.

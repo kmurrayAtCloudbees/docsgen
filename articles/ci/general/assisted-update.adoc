@@ -1,0 +1,8 @@
+
+=== Request an Assisted Update from CloudBees prior to upgrading
+
+We recommend an “Assisted Update” for all our users to help guide them through their CloudBees CI updates to make the process easier and safer.
+
+This process allows a CloudBees Development Support Engineer to review your instance and prepare a customized update plan.
+
+For more details, review the https://support.cloudbees.com/hc/en-us/articles/115001919212-Required-Data-Assisted-Update[Assisted Update] knowledge base article.

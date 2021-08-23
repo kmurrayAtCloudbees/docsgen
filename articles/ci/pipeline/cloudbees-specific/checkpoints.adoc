@@ -1,0 +1,10 @@
+
+== Checkpoints
+
+All Pipelines are durable. If a Controller needs to be restarted (or crashes, or the server reboots) while a job is running, it resumes at the same point in its Pipeline script after the Controller restarts.
+
+However, in some cases, a Pipeline will have done a great deal of work and proceeded to a point where a transient error occurred: one which does not reflect the inputs to this build, such as source code changes. For example, after completing a lengthy build and test of a software component, final deployment to a server might fail for any reason, such as a DNS error or low disk space. After correcting the problem, you might prefer to restart just the last portion of the Pipeline, without needing to redo everything that came before.
+
+The CloudBees `checkpoint` step makes this possible.
+
+For more information, read the official https://docs.cloudbees.com/docs/admin-resources/latest/pipelines-user-guide/administering-jenkins-pipeline#inserting-checkpoints[Checkpoints] documentation.

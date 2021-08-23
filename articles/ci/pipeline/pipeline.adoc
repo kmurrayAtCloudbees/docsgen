@@ -1,0 +1,12 @@
+
+== Pipeline
+
+:leveloffset: +1
+
+include::general.adoc[]
+
+include::cloudbees.adoc[]
+
+include:: pipeline-security.adoc[]
+
+:leveloffset: -1

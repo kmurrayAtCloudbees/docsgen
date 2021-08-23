@@ -1,0 +1,32 @@
+= {CUSTOMER_NAME}: CloudBees CI on traditional platforms Best Practices
+{CONSULTANT_NAME}
+v1.0, {DOC_DATE}
+:toc: right
+:doctype: book
+:icons: font
+
+include::01-executive-summary.adoc[]
+
+<<<
+
+ifeval::["{INCLUDE_DETAILED_RECOMMENDATIONS}" == true]
+
+include::../../articles/ci/recommendations/detailed-recommendations.adoc[]
+
+endif::[]
+
+<<<
+
+include::../../articles/ci/traditional/ci-traditional-installation.adoc[]
+
+<<<
+
+include::../../articles/ci/traditional/ci-traditional-configuration.adoc[]
+
+<<<
+
+include::../../articles/ci/pipeline/pipeline.adoc[]
+
+<<<
+
+include::references.adoc[]

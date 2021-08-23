@@ -1,0 +1,5 @@
+
+== Elasticsearch
+
+Currently, the only supported solution for using Elasticsearch is via the https://docs.cloudbees.com/docs/cloudbees-ci/latest/monitoring/elasticsearch-reporter[Elasticsearch Reporter] plugin.
+

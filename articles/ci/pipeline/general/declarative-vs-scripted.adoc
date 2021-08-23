@@ -1,0 +1,6 @@
+
+== Declarative syntax versus Scripted syntax
+
+Although Scripted syntax was the first syntax released for usage, it is recommended that you  use Declarative syntax for all new pipeline creation.
+
+One of the primary reasons is because all pipeline syntax, whether Scripted or Declarative (except for the contents of `sh`, `bat`, or `powershell` steps), run only on the Master. In order to keep the Master as stable as possible, you will want as much work as possible to happen on an agent. In order to do that, you need to write (or rewrite) pipelines to use minimal Scripted syntax and have all work run inside of `sh`, `bat`, or `powershell`.

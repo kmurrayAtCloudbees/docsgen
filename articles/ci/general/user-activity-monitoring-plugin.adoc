@@ -1,0 +1,6 @@
+
+== Counting and monitoring user licenses with User Activity Monitoring
+
+The User Activity Monitoring plugin helps you understand licensing and entitlement. It provides you with a summary of user activity, CSV exports of user access details, and JSON reports that can be exported to other applications.
+
+For more information, read the official https://docs.cloudbees.com/docs/admin-resources/latest/plugins/user-activity-monitoring[User Activity Monitoring] documentation.

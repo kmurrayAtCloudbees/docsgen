@@ -1,0 +1,10 @@
+
+== Health Advisor by CloudBees
+
+The https://docs.cloudbees.com/docs/admin-resources/latest/plugins/cloudbees-jenkins-advisor[Health Advisor by CloudBees] plugin should be installed and configured for all of your CloudBees CI based products.
+
+The plugin periodically sends support bundles to the CloudBees Advisor Service. These support bundles are scanned for potential issues. From these issues, recommendations are compiled into a report and
+emailed to you.
+
+
+

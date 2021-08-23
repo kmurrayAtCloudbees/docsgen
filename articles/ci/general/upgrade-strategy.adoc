@@ -1,0 +1,17 @@
+
+=== Plan an upgrade strategy for CloudBees CI
+
+On average, CloudBees releases a new version of CloudBees CI every four to six weeks. In a perfect world, the {TEAM_NAME} team would upgrade CloudBees CI on a monthly basis after a proper validation process has occurred.
+
+Always wait for a few days after a new release prior to applying the upgrade to any production system. Preferably, you would apply the upgrade in a non-prod environment to test prior to applying to a production environment.
+
+ifeval::["{K8S_PLATFORM}" == "OpenShift"]
+:k8s-openshift:
+endif::[]
+ifndef::K8S_PLATFORM[]
+:k8s-empty:
+endif::[]
+
+ifndef::k8s-empty,k8s-openshift[]
+NOTE: Since {CUSTOMER_ABBR} is using {K8S_PLATFORM}, it is feasible that you could spin up a new {K8S_PLATFORM} cluster with the current CloudBees CI version running in {CUSTOMER_ABBR}'s production environment and upgrade to the latest version. Once that validation is completed, that {K8S_PLATFORM} cluster can be destroyed.
+endif::[]

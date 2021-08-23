@@ -1,0 +1,39 @@
+:imagesdir: ../../..
+:CUSTOMER_NAME: Sample Customer
+:CUSTOMER_ABBR: Sample Customer
+:CONSULTANT_NAME: CloudBees Professional Services
+:DOC_DATE: 2019-07-15
+:K8S_PLATFORM: EKS
+:PS_PITCH: no
+:ENGAGEMENT_END_DATE: the 18th day of September 2019
+:SOW_ID: 0061O00001OvF41QAF
+:CLOUDBEES_LEGAL_NAME: CloudBees, Inc.
+:LEGAL_CUSTOMER_NAME: Sample Customer, Inc.
+:SOW_DATE: June 27, 2019
+:SOW_PREAMBLE: Agenda 1
+:SOW_OWNER: <<Whoever signed the SOW>>
+:PREPAID: yes
+:PREPAID_DAYS_REMAINING: 7 days
+:TEAM_NAME: DevOps
+
+= {CUSTOMER_NAME}: Professional Services Summary Report
+{CONSULTANT_NAME}
+v1.0, {DOC_DATE}
+:toc: right
+:doctype: book
+
+:icons: font
+
+include::01-executive-summary.adoc[]
+
+<<<
+
+include::03-recommendations-full.adoc[]
+
+<<<
+
+include::04-next-steps.adoc[]
+
+<<<
+
+include::references.adoc[]

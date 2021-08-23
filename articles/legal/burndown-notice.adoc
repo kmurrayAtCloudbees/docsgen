@@ -1,0 +1,9 @@
+
+The delivery of this report certifies that on {ENGAGEMENT_END_DATE}, the deliverables as defined in the Statement of Work (
+ifeval::["{SOW_PREAMBLE}" != ""]
+{SOW_PREAMBLE}:
+endif::[]
+#{SOW_ID} ) between CloudBees, Inc and {CUSTOMER_NAME} dated {SOW_DATE} have been accepted by {SOW_OWNER}.
+ifeval::["{PREPAID}" == "yes"]
+With the completion of this engagement, {CUSTOMER_NAME} has {PREPAID_DAYS_REMAINING} remaining of prepaid credit.
+endif::[]

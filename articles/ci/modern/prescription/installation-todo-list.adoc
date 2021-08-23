@@ -1,0 +1,232 @@
+ifeval::["{K8S_PLATFORM}" == "AKS"]
+:k8s-platform-aks:
+endif::[]
+ifeval::["{K8S_PLATFORM}" == "EKS"]
+:k8s-platform-eks:
+endif::[]
+ifeval::["{K8S_PLATFORM}" == "GKE"]
+:k8s-platform-gke:
+endif::[]
+ifeval::["{K8S_PLATFORM}" == "Kubernetes"]
+:k8s-platform-vanilla:
+endif::[]
+ifeval::["{K8S_PLATFORM}" == "PKS"]
+:k8s-platform-pks:
+endif::[]
+
+== CloudBees CI Pre-installation configuration
+
+=== Pre-installation requirements
+
+Review the pre-installation documentation for {K8S_PLATFORM}:
+
+ifdef::k8s-platform-aks[]
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/aks-install-guide/aks-pre-install-requirements[Pre-installation requirements on AKS]
+
+[NOTE]
+====
+One of the critical pre-requisites for your worker nodes:
+`Use an instance type that allows premium disks (for example: Standard_D4s_v3)`
+====
+endif::[]
+
+ifdef::k8s-platform-eks[]
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/eks-install-guide/eks-pre-install-requirements-helm[Pre-installation requirements on EKS]
+endif::[]
+
+ifdef::k8s-platform-gke[]
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/gke-install-guide/gke-pre-install-requirements[Pre-installation requirements on GKE]
+endif::[]
+
+ifdef::k8s-platform-vanilla[]
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/kubernetes-install-guide/kubernetes-pre-install-requirements[Pre-installation requirements on Kubernetes]
+endif::[]
+
+ifdef::k8s-platform-pks[]
+https://docs.cloudbees.com/docs/cloudbees-ci/latest/pks-install-guide/pks-pre-install-requirements[Pre-installation requirements on PKS]
+endif::[]
+
+=== Installation Customer To Do List
+
+ifdef::k8s-platform-eks,k8s-platform-aks,k8s-platform-gke[]
+. Which region will you be using?
++
+[width="90%"]
+|=========================================================
+|Region |
+|=========================================================
+endif::[]
+
+
+ifeval::["{IS_OPENSHIFT}" == "no"]
+. What version of Kubernetes will you be using?
++
+[width="90%"]
+|=========================================================
+|Version |
+|=========================================================
+. CloudBees CI on modern cloud platform requires an NGINX Ingress controller to be installed. Please confirm this is available and the version that is installed.
++
+[width="90%"]
+|=========================================================
+|NGINX Ingress version |
+|=========================================================
+. You need to ensure that a suitable Load balancer is setup to direct traffic to the Ingress controller, please confirm that this is in place and configured.
+. Your DNS configuration should be in place and traffic should successfully route through to your ingress controller.
++
+[width="90%"]
+|=========================================================
+|DNS Name |
+|=========================================================
+endif::[]
+
+ifeval::["{IS_OPENSHIFT}" == "yes"]
+. What version of OpenShift will you be using?
++
+[width="90%"]
+|=========================================================
+|Version |
+|=========================================================
+. CloudBees CI on OpenShift requires a load balancer configured and pointing to the Router service.
++
+[width="90%"]
+|=========================================================
+|Is the load balancer configured? |
+|=========================================================
+
+
+. Your DNS name should be configured and resolve to the load balancer in front of the Router service.
++
+[width="90%"]
+|=========================================================
+|DNS Name |
+|=========================================================
+endif::[]
+
+. Is SSL required for your environment?
+
++
+[width="90%"]
+|=========================================================
+|SSL Required? |
+|=========================================================
+
+
++
+[NOTE]
+====
+* Self-signed - please refer to the 'Using self-signed certificates in CloudBees CI' section of the installation documentation
+* SSL certificates must be installed at the load balancer
+====
+
+ifeval::["{IS_OPENSHIFT}" == "no"]
+. It is recommended to use a CloudBees CI specific namespace in the cluster with permissions to create `Role` and `RoleBinding` objects. Typically this means having the `cluster-admin` super-user role in that namespace, and that namespace only.
++
+NOTE: This is only needed during the installation. Services will run using the created roles with limited privileges.
+
++
+[width="90%",options="header"]
+|=========================================================
+|Purpose|Namespace|CPU|Memory
+
+|CloudBees CI| | |
+
+|Builds| | |
+
+|=========================================================
+. Confirm you have a dedicated account, with admin access, within the Kubernetes namespaces.
+endif::[]
+
+ifeval::["{IS_OPENSHIFT}" == "yes"]
+. A https://docs.openshift.com/container-platform/3.9/architecture/core_concepts/projects_and_users.html#projects[Project] must be created that has permissions to create `Role` and `RoleBinding` objects.
++
+[width="90%"]
+|=========================================================
+|Project name |
+|=========================================================
+
+endif::[]
+
+. By default, CloudBees CI will use whatever class is configured to be the Default Storage class. Verify that a default storage class for each namespace has been set. To confirm you have a default storage class, run the following command:
++
+[source,block]
+----
+kubectl get storageclass
+----
+In the output you should expect to see "default" next to one of the types, similar to below.
++
+[source,block]
+----
+NAME            PROVISIONER
+default         kubernetes.io/aws-ebs
+gp2 (default)   kubernetes.io/aws-ebs
+----
++
+NOTE: The `NAME` and `PROVISIONER` are likely to be different in your own environment.
+
++
+[width="90%",options="header"]
+|=========================================================
+|`kubectl get storageclass` output
+| {nbsp}
+| {nbsp}
+| {nbsp}
+| {nbsp}
+| {nbsp}
+| {nbsp}
+| {nbsp}
+|=========================================================
+
+
+. If `default` does not appear next to any `Name`, run the following command to set a default:
++
+[source,block]
+----
+kubectl patch storageclass <your-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+----
++
+. Confirm that the storage class configured and intended for use by CloudBees CI dynamically creates persistent volumes.
+
++
+[width="90%"]
+|=========================================================
+|Dynamic provisioning supported? |
+|=========================================================
+
+
+ifeval::["{IS_ON_PREMISE}" == "yes"]
++
+NOTE: If CloudBees CI is being installed on-premise, https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client[Kubernetes NFS-Client Provisioner] is the only supported provisioner.
+
+. There are two ways you can provide an NFS-based Storage Class for CloudBees CI:
+
+.. Create a new NFS-based Storage Class and make it the default. This is the easiest because you don’t have to change the CloudBees CI configuration.
+
+.. Create a new NFS-based Storage Class and then, before you deploy change the CloudBees CI configuration file to use the new storage class that you created.
+
++
+[width="90%"]
+|=========================================================
+|Will the NFS storage class be default or not default? |
+|=========================================================
+
+
+. Make sure that your NFS storage is v4.1 and is backed by SSDs and *not* rotational drives.
+
++
+[width="90%"]
+|=========================================================
+|Is NFS version 4.1 and SSD? |
+|=========================================================
+
+
+NOTE: https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-reference-architecture/ra-for-onprem/#_storage_requirements[Storage Requirements] has more detailed information about the specifics of using NFS on-premise.
+
+
+endif::[]
+
+:k8s-platform-aks!:
+:k8s-platform-eks!:
+:k8s-platform-gke!:
+:k8s-platform-pks!:
+:k8s-platform-vanilla!:

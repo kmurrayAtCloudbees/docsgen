@@ -1,0 +1,4 @@
+
+== Java Options
+
+Follow the instructions from sections A, B and D of https://support.cloudbees.com/hc/en-us/articles/222446987-Prepare-Jenkins-for-Support[Prepare Jenkins for Support] to configure the Java startup parameters.

@@ -1,0 +1,11 @@
+
+== What is a support bundle?
+
+The support bundle UI provides a list of all the classes of information that can be included in the support bundle.
+Normally, it is best to include all the default information selected. It is possible to restrict information selected, however this may delay support in diagnosing issues.
+Where possible, use the defaults.
+
+For more information about a Support Bundle and how to create one can be found at
+https://docs.cloudbees.com/docs/admin-resources/latest/support-bundle/[Generating a support bundle].
+
+Finally, you can review the Arnaud Heritier's slides from his https://speakerdeck.com/aheritier/my-friend-the-support-bundle[My friend, the support bundle] session at DevOps World Nice 2018.

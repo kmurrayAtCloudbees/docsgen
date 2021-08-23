@@ -1,0 +1,20 @@
+
+== Miscellaneous Configuration Container
+
+Operations Center provides a facility to replicate a subset of system configuration information (configuration snippet) to Client Controllers.
+
+Creating a configuration snippet replicates that configuration to any Client Controllers within the same folder hierarchy that have not opted out of receiving shared configuration. This feature is ideal when you have some configuration such as Alerting or E-mail configuration that should be kept in sync on one (or more) Client Controllers. It is possible to define multiple shared configuration within the same folder as well in any parent folder and the configuration of all of these will be replicated to the Client Controller.
+
+=== Alerts
+
+
+=== E-mail Notification
+
+
+=== System Message
+
+
+=== Tools Installation
+
+The Tool Installation mechanism allows you to specify tool setup procedures in global configurations and then use them in Jenkins jobs. Various Tool Installation types are provided by Jenkins core and plugins: JDK, Maven, Git, and Docker CLI. Large-scale distributed installations may include dozens of complex tool configurations, hence it is recommended to store them in Operations Center using this snippet.
+

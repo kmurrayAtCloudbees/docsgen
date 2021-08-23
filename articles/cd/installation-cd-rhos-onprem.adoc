@@ -1,0 +1,182 @@
+
+== Installation of CloudBees CD on RedHat OpenShift
+
+NOTE: This document outlines the steps to install CloudBees CD In a RedHat OpenShift environment that is deployed on premises. This is to be used along with the Installation Documentation availble at https://docs.cloudbees.com/docs/cloudbees-cd/latest/install-k8s/
+
+=== Prerequisites
+* Have a running OpenShift cluster
+** Cluster Requirements: https://docs.cloudbees.com/docs/cloudbees-common/latest/supported-platforms/cloudbees-cd#k8s-cluster
+* Config file to access the OpenShift cluster
+* kubectl and oc are installed
+* Helm version 3 or latest
+* Database instance
+** Database requirements: https://docs.cloudbees.com/docs/cloudbees-cd/latest/install-k8s/#Database
+* Persistent Storage
+** Storage Requirements: https://docs.cloudbees.com/docs/cloudbees-cd/latest/install-k8s/#_persistent_storage
+
+=== Installation Steps
+* Create a Namespace
+[source,bash]
+kubectl create namespace cloudbees-demo
+
+* Add Permissions to run
+[source,bash]
+oc adm policy add-scc-to-user anyuid system:serviceaccount:<NAMESPACE>:<SERVICEACCOUNT>
+
+* Edit Security Context Constraints on the cluster
+[source,bash]
+oc edit scc restricted
+
+** Change the values flagged with "## Change this" and validate the values under 'volumes:' exist. If save fails command to apply changes will be displayed in terminal.
+[source,bash]
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+allowHostDirVolumePlugin: true ## Change this
+allowHostIPC: false
+allowHostNetwork: true  ## Change this
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegeEscalation: true
+allowPrivilegedContainer: true  ## Change this
+allowedCapabilities: null
+apiVersion: security.openshift.io/v1
+defaultAddCapabilities:  ## Change this
+- NET_BIND_SERVICE
+fsGroup:
+type: MustRunAs
+groups:
+- system:authenticated
+kind: SecurityContextConstraints
+metadata:
+annotations:
+kubernetes.io/description: restricted denies access to all host features and requires
+pods to be run with a UID, and SELinux context that are allocated to the namespace.  This
+is the most restrictive SCC and it is used by default for authenticated users.
+creationTimestamp: 2020-04-14T08:33:06Z
+generation: 3
+name: restricted
+resourceVersion: "41339"
+selfLink: /apis/security.openshift.io/v1/securitycontextconstraints/restricted
+uid: 42e379d5-12d8-4950-b8aa-c6ad283e6967
+priority: null
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SETUID
+- SETGID
+runAsUser:
+type: RunAsAny  ## Change this
+seLinuxContext:
+type: RunAsAny  ## Change this
+supplementalGroups:
+type: RunAsAny
+users: []
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- hostPath
+- persistentVolumeClaim
+- projected
+- secret
+
+* Create a custom values file to override Helm chart values
+[source,bash]
+## Database configuration section
+##---------------------------------------------
+database:
+## 1. The database to use for CloudBees Flow installation.
+## The following database types are supported with Flow in a production environment:
+## mysql, oracle, or sqlserver
+##
+## The database type must be specified.
+dbType: 'mysql'
+## 2. The name of the database to use with CloudBees Flow installation.
+##
+## The database name must be specified.
+dbPassword:
+dbUser:
+dbName:
+## 3. Name of the secret containing the database user credentials.
+## The data field must contain base64 encoded values for keys 'DB_USER' and 'DB_PASSWORD'.
+## E.g., kubectl create secret generic flow-db-secret --from-literal=DB_USER=flow_user --from-literal=DB_PASSWORD='S!*d$z5Dsb'
+##
+## Set the name of the secret that contains the database user credentials.
+#existingSecret: flow-db-secret
+## 4.(a) Database hostname if the database instance is running outside the cluster
+##
+## Either the database hostname (externalEndpoint) or the database service name (clusterEndpoint) must be specified.
+##
+## Uncomment the following line to set the database hostname.
+# externalEndpoint: flowdb.example.com
+## 4.(b) Database service name if the database instance is running within the cluster. Use the service DNS name if
+## the database service is running in a different namespace in the cluster, e.g., my-sql-db-mysql.default.svc.cluster.local
+##
+## Either the database hostname (externalEndpoint) or the database service name (clusterEndpoint) must be specified.
+##
+## Uncomment the following line to set the database service name.
+clusterEndpoint:
+## 5. The database port to use.
+##
+## The database port must be specified.
+dbPort:
+##---------------------------------------------
+## Flow storage configuration section
+##---------------------------------------------
+storage:
+volumes:
+serverPlugins:
+## A ReadWriteMany storage class used for plugins directory.
+## It is shared across all the Flow server and the web server
+## replicas.
+storageClass:
+repositoryStorage:
+storageClass:
+##---------------------------------------------
+## Flow server admin credentials section
+##---------------------------------------------
+flowCredentials:
+## Name of the secret containing the admin user password to use.
+## The data field must contain base64 encoded value for key 'CBF_SERVER_ADMIN_PASSWORD'.
+## E.g., kubectl create secret generic your-flow-admin-secret --from-literal=CBF_SERVER_ADMIN_PASSWORD='rrx!*d$z75Dsb'
+##
+## Set the name of the secret that contains the admin user password.
+adminPassword:
+nginx-ingress: false
+enabled: false
+#  controller:
+#    service:
+#      loadBalancerIP: {{ .Values.CDIngressLoadBalIP }}
+ingress:
+host:
+certificate:
+existingSecret:
+annotations:
+kubernetes.io/ingress.class: "nginx"
+
+* Add the charts to the Helm repository
+[source,bash]
+helm repo add cloudbees https://charts.cloudbees.com/public/cloudbees
+helm repo update
+
+** In some cases you may need to pull the chart to make edits as directed by the CloudBees Team
+[source,bash]
+helm pull cloudbees/cloudbees-flow
+
+* Install using Helm
+[source,bash]
+helm install releaseName cloudbees/cloudbees-flow \
+-f valuesFile --namespace nameSpace --timeout 10000s
+
+* Helm Upgrade
+** To make changes to a current installation, use Helm Upgrade
+[source,bash]
+helm upgrade releaseName cloudbees/cloudbees-flow \
+-f valuesFile --namespace nameSpace --timeout 10000s
+
+
+
+

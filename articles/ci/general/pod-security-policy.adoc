@@ -1,0 +1,6 @@
+
+== Kubernetes Pod Security Policies
+
+A Pod Security Policy is a cluster-level resource that controls security sensitive aspects of the pod specification.
+
+For more information specific to using Pod Security Policies with CloudBees CI on modern cloud platform, refer to https://support.cloudbees.com/hc/en-us/articles/360034591531-How-to-use-Kubernetes-Pod-Security-Policies-with-CloudBees-Core-on-Modern-Cloud-Platforms[How to use Kubernetes Pod Security Policies with CloudBees CI (CloudBees Core) on Modern Cloud Platforms]
